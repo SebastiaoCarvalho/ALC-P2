@@ -3,8 +3,7 @@
 
 from parsers.input_parser import parse_input
 from parsers.output_parser import parse_output
-from pysat.examples.rc2 import RC2
-from pysat.formula import WCNF
+from z3 import Optimize, sat
 from encoding.same_city_depart_encoder import SameCityDepartEncoder
 from encoding.same_city_arrival_encoder import SameCityArrivalEncoder  
 from encoding.stay_n_days_encoder import StayNDaysEncoder
@@ -17,7 +16,7 @@ from encoding.invalid_base_city_encoder import InvalidBaseCityEncoder
 
 city_map, flight_list = parse_input()
 
-solver = RC2(WCNF())
+solver = Optimize()
 
 encoder = SameCityDepartEncoder()
 var_counter = encoder.encode(solver, flight_list, city_map, len(flight_list))
@@ -37,12 +36,13 @@ var_counter = encoder.encode(solver, flight_list, city_map, var_counter)
 encoder = SoftEncoder()
 var_counter = encoder.encode(solver, flight_list, city_map, var_counter)
 
-encoder = InvalidFlightsEncoder()
-var_counter = encoder.encode(solver, flight_list, city_map, var_counter)
+# encoder = InvalidFlightsEncoder()
+# var_counter = encoder.encode(solver, flight_list, city_map, var_counter)
 
-encoder = InvalidBaseCityEncoder()
-var_counter = encoder.encode(solver, flight_list, city_map, var_counter)
-
-solution = solver.compute()
-if solution != None:
-    parse_output(solution, flight_list, city_map)
+# encoder = InvalidBaseCityEncoder()
+# var_counter = encoder.encode(solver, flight_list, city_map, var_counter)
+if solver.check() != sat:
+    parse_output(solver.model(), flight_list, city_map)
+else:
+    print(solver.unsat_core())
+    print("No solution found")

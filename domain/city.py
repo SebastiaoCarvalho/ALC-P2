@@ -1,18 +1,22 @@
 class City :
 
-    def __init__(self, name, code, num_nights) -> None:
+    def __init__(self, name, code, min_nights, max_nights) -> None:
         self.name = name
         self.code = code
-        self.num_nights = num_nights
+        self.min_nights = min_nights
+        self.max_nights = max_nights
     
     def __repr__(self) -> str:
-        return f"{self.name} {self.code} {self.num_nights}"
+        return f"{self.name} {self.code} {self.min_nights} {self.max_nights}"
     
     def get_name(self) -> str:
         return self.name
 
-    def get_nights(self) -> int:
-        return self.num_nights
+    def get_min_nights(self) -> int:
+        return self.min_nights
+    
+    def get_max_nights(self) -> int:
+        return self.max_nights
 
     def is_base_city(self) -> bool:
-        return self.num_nights == -1
+        return self.min_nights == -1

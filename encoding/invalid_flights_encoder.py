@@ -1,12 +1,12 @@
 from datetime import timedelta
-from pysat.examples.rc2 import RC2
+from z3 import Optimize
 from domain.flight import Flight
 from domain.city import City
 from encoding.encoder import Encoder
 
 class InvalidFlightsEncoder(Encoder):
 
-    def encode(self, solver : RC2, flight_list : list[Flight], city_dict: dict[str, City], var_count: int) -> int:
+    def encode(self, solver : Optimize, flight_list : list[Flight], city_dict: dict[str, City], var_count: int) -> int:
 
         for city in city_dict.keys():
             if city_dict[city].is_base_city():
@@ -17,5 +17,5 @@ class InvalidFlightsEncoder(Encoder):
             for depart in departs:
                 required_arrival_day = depart.get_day() - timedelta(days=required_stay)
                 if not any(arrival.get_day() == required_arrival_day for arrival in arrivals):
-                    solver.add_clause([-depart.get_id()])
+                    solver.add([-depart.get_id()])
                 

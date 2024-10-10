@@ -1,17 +1,16 @@
-from pysat.examples.rc2 import RC2
+from z3 import Optimize
 from domain.flight import Flight
 from domain.city import City
 from encoding.encoder import Encoder
 from pysat.card import CardEnc, EncType
+from z3 import AtMost, AtLeast
 
 class SameCityArrivalEncoder(Encoder) :
 
-    def encode(self, solver : RC2, flight_list : list[Flight], city_dict: dict[str, City], var_count: int) -> int :
+    def encode(self, solver : Optimize, flight_list : list[Flight], city_dict: dict[str, City], var_count: int) -> int :
         for city in city_dict.keys():
             arrivals = [flight.get_id() for flight in flight_list if flight.get_arrival_city() == city]
-            enc = CardEnc.equals(arrivals, bound=1, top_id=var_count, encoding=EncType.seqcounter)
-            for clause in enc.clauses:
-                solver.add_clause(clause)
-            var_count = max(var_count, max(abs(literal) for clause in enc.clauses for literal in clause))
+            solver.add(AtMost(arrivals + [1]))
+            solver.add(AtLeast(arrivals + [1]))
         return var_count
     

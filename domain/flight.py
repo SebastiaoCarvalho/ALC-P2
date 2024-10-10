@@ -1,9 +1,10 @@
 from datetime import date
+from z3 import Bool
 
 class Flight :
 
-    def __init__(self, id, day_str, departure_city, arrival_city, departure_time, arrival_time, cost) -> None:
-        self.id = id 
+    def __init__(self, day_str, departure_city, arrival_city, departure_time, arrival_time, cost) -> None:
+        self.id = Bool(f"flight_{departure_city}_{arrival_city}_{day_str}")
         day, month = day_str.split('/')
         self.day = date(2023, int(month), int(day))
         self.departure_city = departure_city
@@ -12,7 +13,7 @@ class Flight :
         self.arrival_time = arrival_time
         self.cost = cost
     
-    def get_id(self) -> int:
+    def get_id(self) -> Bool:
         return self.id
     
     def get_day(self) -> date:
