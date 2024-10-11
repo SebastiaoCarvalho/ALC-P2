@@ -2,7 +2,6 @@ from domain.flight import Flight
 from domain.city import City
 
 def parse_output(solution : list[int], flight_list : list[Flight], city_dict : dict[str, City]):
-    print(solution)
     flight_list = [flight for flight in flight_list if solution[flight.get_id()]]
     flight_list.sort(key=lambda x: x.get_day())
     total_cost = sum(flight.get_cost() for flight in flight_list)
