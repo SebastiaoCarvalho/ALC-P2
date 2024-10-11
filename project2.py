@@ -36,8 +36,8 @@ var_counter = encoder.encode(solver, flight_list, city_map, var_counter)
 encoder = SoftEncoder()
 var_counter = encoder.encode(solver, flight_list, city_map, var_counter)
 
-# encoder = InvalidFlightsEncoder()
-# var_counter = encoder.encode(solver, flight_list, city_map, var_counter)
+encoder = InvalidFlightsEncoder()
+var_counter = encoder.encode(solver, flight_list, city_map, var_counter)
 
 # encoder = InvalidBaseCityEncoder()
 # var_counter = encoder.encode(solver, flight_list, city_map, var_counter)
