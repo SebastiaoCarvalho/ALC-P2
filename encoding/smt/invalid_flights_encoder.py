@@ -1,5 +1,5 @@
 from datetime import timedelta
-from z3 import Optimize, Not
+from z3 import Optimize, Not, And, Implies
 from domain.flight import Flight
 from domain.city import City
 from encoding.smt.encoder import Encoder
@@ -13,8 +13,13 @@ class InvalidFlightsEncoder(Encoder):
             arrivals = [flight for flight in flight_list if flight.get_arrival_city() == city]
             departs = [flight for flight in flight_list if flight.get_departure_city() == city]
             for depart in departs:
-                max_date = depart.get_day() - timedelta(days=city_dict[city].get_min_nights())
-                min_date = depart.get_day() - timedelta(days=city_dict[city].get_max_nights())
-                if not any((arrival.get_day() <= max_date and arrival.get_day() >= min_date) for arrival in arrivals):
-                    solver.add(Not(depart.get_id()))
+                clauses = []
+                for arrival in arrivals:
+                    clauses += [(depart.get_day() - arrival.get_day()).days != city_dict[city].get_var()]
+                solver.add(
+                    Implies(
+                        And(clauses),
+                        Not(depart.get_id())
+                    )
+                )
                 

@@ -1,5 +1,5 @@
 from datetime import date
-from z3 import Bool
+from z3 import Bool, BoolRef
 
 class Flight :
 
@@ -13,7 +13,7 @@ class Flight :
         self.arrival_time = arrival_time
         self.cost = cost
     
-    def get_id(self) -> Bool:
+    def get_id(self) -> BoolRef:
         return self.id
     
     def get_day(self) -> date:
