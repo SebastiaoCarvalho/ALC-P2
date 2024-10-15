@@ -2,7 +2,7 @@ from datetime import timedelta
 from z3 import Optimize, Not
 from domain.flight import Flight
 from domain.city import City
-from encoding.encoder import Encoder
+from encoding.bool.encoder import Encoder
 
 class InvalidFlightsEncoder(Encoder):
 

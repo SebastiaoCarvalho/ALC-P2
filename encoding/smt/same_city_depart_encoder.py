@@ -1,7 +1,7 @@
 from z3 import Optimize
 from domain.flight import Flight
 from domain.city import City
-from encoding.encoder import Encoder
+from encoding.smt.encoder import Encoder
 from z3 import AtMost, AtLeast
 
 class SameCityDepartEncoder(Encoder) :

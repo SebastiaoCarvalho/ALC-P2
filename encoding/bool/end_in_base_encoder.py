@@ -1,7 +1,7 @@
 from z3 import Optimize, Not, Or
 from domain.flight import Flight
 from domain.city import City
-from encoding.encoder import Encoder
+from encoding.bool.encoder import Encoder
 
 class EndInBaseEncoder(Encoder):
 

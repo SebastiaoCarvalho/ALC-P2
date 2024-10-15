@@ -4,14 +4,14 @@
 from parsers.input_parser import parse_input
 from parsers.output_parser import parse_output
 from z3 import Optimize, sat
-from encoding.same_city_depart_encoder import SameCityDepartEncoder
-from encoding.same_city_arrival_encoder import SameCityArrivalEncoder  
-from encoding.stay_n_days_encoder import StayNDaysEncoder
-from encoding.end_in_base_encoder import EndInBaseEncoder
-from encoding.start_in_base_city import StartInBaseCity
-from encoding.soft_encoder import SoftEncoder
-from encoding.invalid_flights_encoder import InvalidFlightsEncoder
-from encoding.invalid_base_city_encoder import InvalidBaseCityEncoder
+from encoding.bool.same_city_depart_encoder import SameCityDepartEncoder
+from encoding.bool.same_city_arrival_encoder import SameCityArrivalEncoder  
+from encoding.bool.stay_n_days_encoder import StayNDaysEncoder
+from encoding.bool.end_in_base_encoder import EndInBaseEncoder
+from encoding.bool.start_in_base_city import StartInBaseCity
+from encoding.bool.soft_encoder import SoftEncoder
+from encoding.bool.invalid_flights_encoder import InvalidFlightsEncoder
+from encoding.bool.invalid_base_city_encoder import InvalidBaseCityEncoder
 
 
 city_map, flight_list = parse_input()

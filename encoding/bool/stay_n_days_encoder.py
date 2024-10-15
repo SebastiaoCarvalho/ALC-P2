@@ -1,7 +1,7 @@
 from z3 import Optimize, Or, Not
 from domain.flight import Flight
 from domain.city import City
-from encoding.encoder import Encoder
+from encoding.bool.encoder import Encoder
 from datetime import timedelta
 
 class StayNDaysEncoder(Encoder) :

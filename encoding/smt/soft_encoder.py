@@ -1,7 +1,7 @@
 from z3 import Optimize, Not, If
 from domain.flight import Flight
 from domain.city import City
-from encoding.encoder import Encoder
+from encoding.smt.encoder import Encoder
 
 class SoftEncoder(Encoder):
 
