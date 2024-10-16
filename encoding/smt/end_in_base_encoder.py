@@ -1,4 +1,4 @@
-from z3 import Optimize, Not, Or
+from z3 import Optimize, Not, Or, Implies
 from domain.flight import Flight
 from domain.city import City
 from encoding.smt.encoder import Encoder
@@ -13,5 +13,9 @@ class EndInBaseEncoder(Encoder):
             flights  = [flight for flight in flight_list if flight.get_arrival_city() != city]
             for arrival in arrivals:
                 for flight in flights:
-                    if arrival.get_day() <= flight.get_day():
-                        solver.add(Or(Not(arrival.get_id()), Not(flight.get_id())))
+                    solver.add(
+                        Implies(
+                            arrival.get_day() <= flight.get_day(), 
+                            Or(Not(arrival.get_id()), Not(flight.get_id()))
+                        )
+                    )
