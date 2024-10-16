@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# alc24 - 6 - project1 
+# alc24 - 6 - project2
 
 from parsers.input_parser import parse_input
 from parsers.output_parser import parse_output
@@ -20,31 +20,31 @@ city_map, flight_list = parse_input()
 solver = Optimize()
 
 encoder = CityEncoder()
-var_counter = encoder.encode(solver, flight_list, city_map, len(flight_list))
+var_counter = encoder.encode(solver, flight_list, city_map)
 
 encoder = SameCityDepartEncoder()
-var_counter = encoder.encode(solver, flight_list, city_map, var_counter)
+var_counter = encoder.encode(solver, flight_list, city_map)
 
 encoder = SameCityArrivalEncoder()
-var_counter = encoder.encode(solver, flight_list, city_map, var_counter)
+var_counter = encoder.encode(solver, flight_list, city_map)
 
 encoder = StayNDaysEncoder()
-var_counter = encoder.encode(solver, flight_list, city_map, var_counter)
+var_counter = encoder.encode(solver, flight_list, city_map)
 
 encoder = EndInBaseEncoder()
-var_counter = encoder.encode(solver, flight_list, city_map, var_counter)
+var_counter = encoder.encode(solver, flight_list, city_map)
 
 encoder = StartInBaseCity()
-var_counter = encoder.encode(solver, flight_list, city_map, var_counter)
+var_counter = encoder.encode(solver, flight_list, city_map)
 
 encoder = SoftEncoder()
-var_counter = encoder.encode(solver, flight_list, city_map, var_counter)
+var_counter = encoder.encode(solver, flight_list, city_map)
 
 encoder = InvalidFlightsEncoder()
-var_counter = encoder.encode(solver, flight_list, city_map, var_counter)
+var_counter = encoder.encode(solver, flight_list, city_map)
 
 encoder = InvalidBaseCityEncoder()
-var_counter = encoder.encode(solver, flight_list, city_map, var_counter)
+var_counter = encoder.encode(solver, flight_list, city_map)
 
 if solver.check() == sat:
     parse_output(solver.model(), flight_list, city_map)

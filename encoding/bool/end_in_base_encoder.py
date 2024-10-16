@@ -5,7 +5,7 @@ from encoding.bool.encoder import Encoder
 
 class EndInBaseEncoder(Encoder):
 
-    def encode(self, solver : Optimize, flight_list : list[Flight], city_dict: dict[str, City], var_count: int) -> int:
+    def encode(self, solver : Optimize, flight_list : list[Flight], city_dict: dict[str, City]) -> None:
         for city in city_dict.keys():
             if not city_dict[city].is_base_city():
                 continue
@@ -15,4 +15,3 @@ class EndInBaseEncoder(Encoder):
                 for flight in flights:
                     if arrival.get_day() <= flight.get_day():
                         solver.add(Or(Not(arrival.get_id()), Not(flight.get_id())))
-        return var_count

@@ -5,6 +5,5 @@ from domain.city import City
 class Encoder :
 
     @staticmethod
-    def encode(self, solver : Optimize, flight_list : list[Flight], city_dict: dict[str, City], var_count: int) -> None :
+    def encode(self, solver : Optimize, flight_list : list[Flight], city_dict: dict[str, City]) -> None:
         pass
-

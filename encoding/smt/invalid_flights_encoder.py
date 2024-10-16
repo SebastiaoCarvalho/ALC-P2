@@ -6,7 +6,7 @@ from encoding.smt.encoder import Encoder
 
 class InvalidFlightsEncoder(Encoder):
 
-    def encode(self, solver : Optimize, flight_list : list[Flight], city_dict: dict[str, City], var_count: int) -> int:
+    def encode(self, solver : Optimize, flight_list : list[Flight], city_dict: dict[str, City]) -> None:
         for city in city_dict.keys():
             if city_dict[city].is_base_city():
                 continue
@@ -21,5 +21,4 @@ class InvalidFlightsEncoder(Encoder):
                         And(clauses),
                         Not(depart.get_id())
                     )
-                )
-                
+                )             

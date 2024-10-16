@@ -6,7 +6,7 @@ from datetime import timedelta
 
 class StayNDaysEncoder(Encoder) :
 
-    def encode(self, solver : Optimize, flight_list : list[Flight], city_dict: dict[str, City], var_count: int) -> int :
+    def encode(self, solver : Optimize, flight_list : list[Flight], city_dict: dict[str, City]) -> None:
         for city in city_dict.keys():
             if city_dict[city].is_base_city():
                 continue
@@ -22,4 +22,3 @@ class StayNDaysEncoder(Encoder) :
                     else :
                         solver.add(Or(Not(arrival.get_id()), Not(depart.get_id()))) # can't stay either min or max nights
                 solver.add(Or(disjunction))
-        return var_count

@@ -6,7 +6,7 @@ from encoding.bool.encoder import Encoder
 
 class InvalidFlightsEncoder(Encoder):
 
-    def encode(self, solver : Optimize, flight_list : list[Flight], city_dict: dict[str, City], var_count: int) -> int:
+    def encode(self, solver : Optimize, flight_list : list[Flight], city_dict: dict[str, City]) -> None:
         for city in city_dict.keys():
             if city_dict[city].is_base_city():
                 continue
@@ -16,5 +16,4 @@ class InvalidFlightsEncoder(Encoder):
                 max_date = depart.get_day() - timedelta(days=city_dict[city].get_min_nights())
                 min_date = depart.get_day() - timedelta(days=city_dict[city].get_max_nights())
                 if not any((arrival.get_day() <= max_date and arrival.get_day() >= min_date) for arrival in arrivals):
-                    solver.add(Not(depart.get_id()))
-                
+                    solver.add(Not(depart.get_id()))           
