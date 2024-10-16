@@ -4,23 +4,23 @@
 from parsers.input_parser import parse_input
 from parsers.output_parser import parse_output
 from z3 import Optimize, sat
-from encoding.smt.same_city_depart_encoder import SameCityDepartEncoder
-from encoding.smt.same_city_arrival_encoder import SameCityArrivalEncoder  
-from encoding.smt.stay_n_days_encoder import StayNDaysEncoder
-from encoding.smt.end_in_base_encoder import EndInBaseEncoder
-from encoding.smt.start_in_base_city import StartInBaseCity
-from encoding.smt.soft_encoder import SoftEncoder
-from encoding.smt.invalid_flights_encoder import InvalidFlightsEncoder
-from encoding.smt.invalid_base_city_encoder import InvalidBaseCityEncoder
-from encoding.smt.city_encoder import CityEncoder
-
+from encoding.bool.same_city_depart_encoder import SameCityDepartEncoder
+from encoding.bool.same_city_arrival_encoder import SameCityArrivalEncoder  
+from encoding.bool.stay_n_days_encoder import StayNDaysEncoder
+from encoding.bool.invalid_base_city_encoder import InvalidBaseCityEncoder
+from encoding.bool.invalid_flights_encoder import InvalidFlightsEncoder
+from encoding.bool.end_in_base_encoder import EndInBaseEncoder
+from encoding.bool.start_in_base_city import StartInBaseCity
+from encoding.bool.soft_encoder import SoftEncoder
+from encoding.bool.invalid_base_city_encoder import InvalidBaseCityEncoder
+from encoding.bool.invalid_flights_encoder import InvalidFlightsEncoder
 
 city_map, flight_list = parse_input()
 
 solver = Optimize()
 
-encoder = CityEncoder()
-var_counter = encoder.encode(solver, flight_list, city_map)
+# encoder = CityEncoder()
+# var_counter = encoder.encode(solver, flight_list, city_map)
 
 encoder = SameCityDepartEncoder()
 var_counter = encoder.encode(solver, flight_list, city_map)
